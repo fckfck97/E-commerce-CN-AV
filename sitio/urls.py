@@ -9,7 +9,8 @@ from .views import (
     incre_quantity_item,
     OrderSummaryView,
     CheckoutView,
-    SignUpView
+    SignUpView,
+    Perfil
 )
 
 app_name = 'sitio'
@@ -24,4 +25,5 @@ urlpatterns = [
     path('incre-quantity-item/<pk>/', incre_quantity_item,name='incre-quantity-item'),
     path('checkout/', CheckoutView.as_view(), name='checkout'),
     path('registrate/', SignUpView.as_view(), name='registrate'),
+    path('perfil/<int:pk>/', Perfil.as_view(), name='perfil'),
 ]

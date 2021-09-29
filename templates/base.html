@@ -16,7 +16,35 @@
   <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
   <!-- Your custom styles (optional) -->
   <link href=" {% static 'css/style.min.css' %}" rel="stylesheet">
-  
+  <style type="text/css">
+    html,
+    body,
+    header,
+    .carousel {
+      height: 60vh;
+    }
+
+    @media (max-width: 740px) {
+
+      html,
+      body,
+      header,
+      .carousel {
+        height: 100vh;
+      }
+    }
+
+    @media (min-width: 800px) and (max-width: 850px) {
+
+      html,
+      body,
+      header,
+      .carousel {
+        height: 100vh;
+      }
+    }
+
+  </style>
 
     {% block extra_head %}
     {% endblock extra_head %}
@@ -54,8 +82,7 @@
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
           
-         
-            {% if user.is_authenticated %}
+         {% if user.is_authenticated %}
             <li class="nav-item">
               <a href="{% url 'sitio:order-summary' %}" class="nav-link waves-effect">
                 
@@ -64,13 +91,27 @@
                 <span class="clearfix d-none d-sm-inline-block"> Carrito </span>
                 </a>
             </li>
-            <li class="nav-item">
-                 <a class="nav-link waves-effect">
-                Hola..! {{ user.username }}!
+            <div class="topbar-divider d-none d-sm-block"></div>
+
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                
+                  <span class="mr-2 d-none d-lg-inline text-gray-600 small">Hola..! {{ user.username }}!</span>
+                  <img class="img-profile rounded-circle" src="">
+              </a>
+              <!-- Dropdown - User Information -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="{% url 'sitio:perfil' pk=user.pk%}">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Perfil
                 </a>
-            </li>
-             </li class="nav-item">
-                <a class="nav-link waves-effect" href="{% url 'logout' %}">Salir</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'logout' %}">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Cerrar Sesion
+                </a>
+              </div>
             </li>
             {% else %}
              </li class="nav-item">

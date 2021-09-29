@@ -44,7 +44,7 @@
           <form class="form-search content-search navbar-form" action="/" method="post">
             {% csrf_token %}
               <div class="input-group">
-                  <input placeholder="Buscar" name = "nombre_producto"class="form-control form-text" type="text"/>
+                  <input placeholder="Buscar" name = "nombre_producto" value = "{{ nombre }}"class="form-control form-text" type="text"/>
                   <span class="input-group-btn">
                       <button type="submit" class="btn btn-primary"><span class="icon glyphicon glyphicon-search" ></span>Buscar</button>
                   </span>

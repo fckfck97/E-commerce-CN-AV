@@ -5,7 +5,7 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist                      
 from django.shortcuts import render, get_object_or_404, redirect                      
-from django.views.generic import ListView, DetailView, View, CreateView                   
+from django.views.generic import ListView, DetailView, View, CreateView, TemplateView                  
 from django.utils import timezone   
 from .forms import CheckoutForm,SignUpForm                    
 from .models import (                           
@@ -14,6 +14,9 @@ from .models import (
     OrderItem,
     Perfil
 )
+# Perfil
+class Perfil(LoginRequiredMixin,TemplateView):
+    template_name = 'perfil.html'
 
 #vista del registro de usuarios
 class SignUpView(CreateView):
@@ -49,11 +52,11 @@ class HomeView(ListView):
             producto = Item.objects.filter(item_nombre__contains=item_nombre)
             existencia = Item.objects.filter(item_nombre__contains=item_nombre).exists()
             if existencia == True:
-                return render(request, self.template_name, {'object_list': producto})
+                return render(request, self.template_name, {'object_list': producto, 'nombre':item_nombre})
             else:
                 todo = Item.objects.all()
                 messages.info(request,'El Producto que buscas no esta en el Inventario')
-                return render(request, self.template_name, {'object_list': todo}) 
+                return render(request, self.template_name, {'object_list': todo, 'nombre':item_nombre}) 
 
 class ProductView(DetailView):
     model = Item
